@@ -5,6 +5,7 @@ Flask==0.12
 Flask-Bootstrap==3.3.7.1
 flask-nav==0.6
 Flask-WTF==0.14.2
+gunicorn==19.7.0
 itsdangerous==0.24
 Jinja2==2.9.5
 MarkupSafe==0.23
