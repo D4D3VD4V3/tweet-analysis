@@ -1,0 +1,69 @@
+{% extends "basic_layout.html" %}
+{% block content %}
+    {{ super() }}
+
+    {% block styles %}
+    {{super()}}
+    <link rel="stylesheet"
+          href="{{url_for('static', filename='gaugestyle.css')}}">
+    {% endblock %}
+
+
+    <body>
+    <div class="wrapper">
+        <div class="box">
+            <div id="gauge1" class="gauge"></div>
+        </div>
+        <div class="box">
+            <div id="gauge2" class="gauge"></div>
+        </div>
+    </div>
+    <script src="../static/raphael-2.1.4.min.js"></script>
+    <script src="../static/justgage.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function (event) {
+
+
+            var gauge1 = new JustGage({
+                id: 'gauge1',
+                label: 'Subjectivity score',
+                value: (0.56+1)*50,
+                min: -1,
+                max: 1,
+                symbol: '%',
+                pointer: true,
+                pointerOptions: {
+                    toplength: 8,
+                    bottomlength: -20,
+                    bottomwidth: 6,
+                    color: '#000000'
+                },
+                gaugeWidthScale: 0.1,
+                counter: true,
+                formatnumber:true,
+                levelColors: ['#ff0000','#ffff00', '#00ff00']
+            });
+
+            var gauge2 = new JustGage({
+                id: 'gauge2',
+                label: 'Sentiment score',
+                value: 39,
+                min: 0,
+                max: 50,
+                symbol: '%',
+                pointer: true,
+                pointerOptions: {
+                    toplength: 8,
+                    bottomlength: -20,
+                    bottomwidth: 6,
+                    color: '#000000'
+                },
+                gaugeWidthScale: 0.1,
+                counter: true,
+                levelColors: ['#ff0000','#ffff00', '#00ff00']
+            });
+        });
+    </script>
+    </body>
+
+{% endblock %}

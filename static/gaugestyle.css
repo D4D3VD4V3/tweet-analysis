@@ -1,0 +1,27 @@
+
+.wrapper {
+    position: relative;
+    width: 640px;
+    height: 480px;
+    margin: 50px auto 0 auto;
+    padding-bottom: 30px;
+    clear: both;
+}
+
+.box {
+    float: left;
+    width: 50%;
+    height: 50%;
+    box-sizing: border-box;
+}
+
+.container {
+    width: 450px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.gauge {
+    width: 320px;
+    height: 240px;
+}

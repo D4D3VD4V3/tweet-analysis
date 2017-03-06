@@ -1,0 +1,66 @@
+{% extends "basic_layout.html" %}
+{#TODO: Add bootstrap tooltips to the gauges to explain what they represent#}
+{% block content %}
+    {{ super() }}
+    {% block styles %}
+        {{ super() }}
+        <link rel="stylesheet"
+              href="{{ url_for("static", filename="gaugestyle.css") }}">
+    {% endblock %}
+    <body>
+    <div class="wrapper">
+        <div class="box">
+            <div id="subjectivitygauge" class="gauge"></div>
+        </div>
+        <div class="box">
+            <div id="sentimentgauge" class="gauge"></div>
+        </div>
+    </div>
+    <script src={{ url_for("static", filename="raphael-2.1.4.min.js") }}></script>
+    <script src={{ url_for("static", filename="justgage.js") }}></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function (event) {
+
+
+            var subjectivitygauge = new JustGage({
+                id: "subjectivitygauge",
+                label: "Subjectivity score",
+                value: ({{ subjectivityavg }}+1) * 50,
+                min: 0,
+                max: 100,
+                symbol: "%",
+                pointer: true,
+                pointerOptions: {
+                    toplength: 8,
+                    bottomlength: -20,
+                    bottomwidth: 6,
+                    color: "#000000"
+                },
+                gaugeWidthScale: 0.1,
+                counter: true,
+                levelColors: ["#d9534f", "#f0ad4e", "#5cb85c"]
+            });
+
+            var sentimentgauge = new JustGage({
+                id: "sentimentgauge",
+                label: "Sentiment score",
+                value: ({{ sentimentavg }}+1) * 50,
+                min: 0,
+                max: 100,
+                symbol: "%",
+                pointer: true,
+                pointerOptions: {
+                    toplength: 8,
+                    bottomlength: -20,
+                    bottomwidth: 6,
+                    color: "#000000"
+                },
+                gaugeWidthScale: 0.1,
+                counter: true,
+                levelColors: ["#d9534f", "#f0ad4e", "#5cb85c"]
+            });
+        });
+    </script>
+    </body>
+
+{% endblock %}

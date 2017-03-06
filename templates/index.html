@@ -1,0 +1,9 @@
+{% extends "basic_layout.html" %}
+
+{% block title %} Home {% endblock %}
+{% block content %}
+    {{ super() }}
+    <center>
+        <a class="btn btn-default" href="{{ url_for("twittersignin") }}">Sign in to Twitter</a>
+    </center>
+{% endblock %}
