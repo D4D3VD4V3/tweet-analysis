@@ -1,4 +1,8 @@
+*.swp
+*.un~
 .idea/
 __pycache__/
+static/.webassets-cache
+static/gen
+tags
 venv/
-static/* linguist-vendored
