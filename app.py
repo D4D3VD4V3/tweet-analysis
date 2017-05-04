@@ -9,6 +9,7 @@ from flask_wtf import FlaskForm
 from textblob import TextBlob
 from wtforms.fields import StringField, SubmitField
 from wtforms.validators import DataRequired, Length
+from flask_assets import Environment, Bundle
 
 secret_key = os.getenv("SECRET_KEY")
 CONSUMER_KEY = os.getenv("CONSUMER_KEY")
@@ -17,6 +18,9 @@ CONSUMER_SECRET = os.getenv("CONSUMER_SECRET")
 app = Flask(__name__)
 app.secret_key = secret_key
 Bootstrap(app)
+assets = Environment(app)
+js_files = Bundle('justgage.js', 'raphael-2.1.4.min.js', filters='rjsmin', output='gen/minified.js')
+assets.register('js_files', js_files)
 topbar = Navbar(View("Home", "home"),
                 Link("Source Code", r"http://www.github.com/d4d3vd4v3/tweet-analysis"))
 nav = Nav()
