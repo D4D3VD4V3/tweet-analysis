@@ -1,0 +1,8 @@
+{%  extends 'bootstrap/base.html' %}
+{% block body %}
+    {% block styles %}
+        {{ super() }}
+        <link rel="stylesheet"
+              href="{{ url_for("static", filename="twittersignin.css") }}">
+    {% endblock %}
+{% endblock %}

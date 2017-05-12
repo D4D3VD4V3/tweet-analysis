@@ -1,4 +1,5 @@
 {% extends "basic_layout.html" %}
+
 {% block content %}
     {{ super() }}
     {% block styles %}
@@ -15,10 +16,12 @@
             <div id="sentimentgauge" class="gauge"></div>
         </div>
     </div>
+
     {% assets "js_files" %}
     <script type="text/javascript" src="{{ ASSET_URL }}">
-	</script>
+    </script>
     {% endassets %}
+     
     <script>
         document.addEventListener("DOMContentLoaded", function (event) {
 

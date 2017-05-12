@@ -1,6 +1,7 @@
 *.swp
 *.un~
 .idea/
+.ropeproject/
 __pycache__/
 static/.webassets-cache
 static/gen

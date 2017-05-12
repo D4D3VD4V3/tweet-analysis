@@ -1,0 +1,51 @@
+{% extends "bootstrap/base.html" %}
+
+{% block body %}
+    {% block styles %}
+        {{ super() }}
+        <link rel="stylesheet"
+              href="{{ url_for("static", filename="showprogress.css") }}">
+    {% endblock %}
+    <h3 id="loadingtext"></h3>
+    <div class="progress">
+        <div class="progress-bar progress-bar-striped active" id="progressbar" role="progressbar"
+             aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%">
+        </div>
+    </div>
+    {% block scripts %}
+        {{ super() }}
+
+        <script>
+	var loadingtext = document.getElementById("loadingtext");
+	var task_id = "{{ task_id }}";
+            function getval() {
+		    $.getJSON("{{ url_for("bp.taskstatus", task_id=task_id) }}", function (data) {
+                    var current = data.current;
+                    var total = data.total;
+		    var cur_progress = current / total * 100;
+                    $("#progressbar").attr("style", "width:" + cur_progress + "%");
+                    $("#progressbar").text(cur_progress + "%");
+
+		    if(cur_progress < 25)
+			    loadingtext.innerHTML = "Crunching some tweets...";
+		    else if(cur_progress < 50)
+			    loadingtext.innerHTML = "Hang on, we're almost halfway there!";
+		    else if(cur_progress < 75)
+			    loadingtext.innerHTML = "Almost there!";
+		    else
+			    loadingtext.innerHTML = "Wrapping things up...";
+
+		    if((typeof data.subjectivityavg == "undefined" ||  typeof data.sentimentavg == "undefined") && current / total * 100 < 100)
+			setTimeout(getval, 500);
+		    else
+			window.location.href = "/showgauges?subjectivityavg=" + data.subjectivityavg + "&sentimentavg=" + data.sentimentavg;
+                });
+            }
+            $(document).ready(function () {
+                getval();
+            });
+        </script>
+
+    {% endblock %}
+
+{% endblock %}
