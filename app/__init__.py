@@ -12,7 +12,7 @@ secret_key = os.getenv("SECRET_KEY")
 CONSUMER_KEY = os.getenv("CONSUMER_KEY")
 CONSUMER_SECRET = os.getenv("CONSUMER_SECRET")
 FLASK_CONFIGURATION = os.getenv("FLASK_CONFIGURATION", "dev")
-NUMBER_OF_TWEETS = os.getenv("NUMBER_OF_TWEETS", config_dict[FLASK_CONFIGURATION].NUMBER_OF_TWEETS)
+NUMBER_OF_TWEETS = int(os.getenv("NUMBER_OF_TWEETS", config_dict[FLASK_CONFIGURATION].NUMBER_OF_TWEETS))
 
 celery = Celery(__name__, backend=os.getenv("RABBITMQ_BIGWIG_RX_URL"), broker=os.getenv("RABBITMQ_BIGWIG_TX_URL"))
 topbar = Navbar(View("Home", "bp.home"), Link("Source Code", r"http://www.github.com/d4d3vd4v3/tweet-analysis"))
