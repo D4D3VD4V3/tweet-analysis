@@ -13,7 +13,6 @@
 		<div class="analyzemytweets">
         <a class="btn btn-default" href="{{ url_for("bp.analyzemytweets") }}">Analyze my tweets</a>
 		</div>
-{#        TODO: Add a placeholder for the form fields#}
         {{ wtf.quick_form(form, action= url_for("bp.analyzehashtag"), button_map={"submit":"success"}) }}
         {{ form.csrf_token }}
 	    </center>
